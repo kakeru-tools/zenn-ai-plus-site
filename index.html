@@ -84,6 +84,17 @@
       color: var(--primary);
     }
     .feature.highlight { border-color: var(--primary); border-width: 2px; }
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .screenshots img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+    }
     .feature .tag {
       display: inline-block;
       background: var(--primary);
@@ -180,6 +191,17 @@
           <h3>技術 SEO チェック</h3>
           <p>狙うキーワード（ライブラリ名・言語名等）の出現密度を確認。Zenn 内検索と外部流入の両方を意識。</p>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>スクリーンショット</h2>
+      <div class="screenshots">
+        <img src="screenshot-1-titles.png" alt="技術タイトル候補 10案画面" />
+        <img src="screenshot-2-opening.png" alt="冒頭文 (TL;DR/問題提起/コード先出し) 画面" />
+        <img src="screenshot-3-outline.png" alt="技術記事構造 章立て画面" />
+        <img src="screenshot-4-code-review.png" alt="コードレビュー画面 (Zenn 限定)" />
+        <img src="screenshot-5-readability.png" alt="読みやすさ評価画面" />
       </div>
     </section>
 
