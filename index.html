@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenn-AI+ — Zenn 用 AI 執筆アシスタント</title>
+  <meta name="description" content="Zenn の執筆画面に AI 執筆補助サイドバーを追加する Chrome 拡張機能。技術特化タイトル候補・冒頭文・章立て・コードレビュー・SEO チェックを瞬時に。" />
+  <link rel="icon" type="image/png" href="icon-128.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --primary: #1f6fcc;
+      --primary-light: #3ea8ff;
+      --fg: #1a1a1a;
+      --muted: #555;
+      --bg: #f4f8ff;
+      --card: #ffffff;
+      --border: #d8e6f8;
+    }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, "Segoe UI", "Hiragino Sans", "Meiryo", "Yu Gothic", sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: white;
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 48px;
+      margin: 0 0 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    header .tagline {
+      font-size: 18px;
+      opacity: 0.95;
+      max-width: 640px;
+      margin: 0 auto 32px;
+    }
+    .cta {
+      display: inline-block;
+      padding: 14px 32px;
+      background: white;
+      color: var(--primary);
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: transform 0.15s;
+    }
+    .cta:hover { transform: translateY(-2px); }
+    .cta.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      margin-left: 12px;
+    }
+    main { max-width: 1080px; margin: 0 auto; padding: 64px 24px; }
+    section { margin-bottom: 80px; }
+    h2 {
+      font-size: 28px;
+      margin: 0 0 24px;
+      letter-spacing: -0.01em;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .feature h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      color: var(--primary);
+    }
+    .feature.highlight { border-color: var(--primary); border-width: 2px; }
+    .feature .tag {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .feature p { margin: 0; color: var(--muted); font-size: 14px; }
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .screenshots img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+    }
+    .pricing {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .price-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .price-card.pro { border-color: var(--primary); border-width: 2px; }
+    .price-card h3 { margin: 0 0 8px; font-size: 22px; }
+    .price-card .price { font-size: 32px; font-weight: 800; color: var(--primary); margin: 8px 0; }
+    .price-card ul { list-style: none; padding: 0; margin: 16px 0 0; text-align: left; }
+    .price-card li { padding: 6px 0; font-size: 14px; color: var(--muted); }
+    .price-card li::before { content: '✓ '; color: var(--primary); font-weight: 700; }
+    .faq dt { font-weight: 700; margin-top: 16px; }
+    .faq dd { margin: 4px 0 0; color: var(--muted); }
+    footer { background: #1a1a1a; color: #aaa; padding: 32px 24px; text-align: center; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 12px; }
+    @media (max-width: 600px) {
+      header h1 { font-size: 32px; }
+      header { padding: 60px 16px 48px; }
+      .pricing { grid-template-columns: 1fr; }
+      .cta.secondary { margin: 12px 0 0; display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display:inline-block;background:rgba(255,255,255,0.2);color:white;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600;margin-bottom:16px;letter-spacing:0.05em;">Zenn 専用</div>
+    <h1>Zenn-AI+</h1>
+    <p class="tagline">
+      技術ブログを書くエンジニアのための AI 執筆アシスタント。<br/>
+      タイトル・冒頭文・章立て・<strong>コードレビュー</strong>・SEO を、Zenn エディタそのままで。
+    </p>
+    <a class="cta" href="#install">Chrome に追加（無料）</a>
+    <a class="cta secondary" href="#features">機能を見る</a>
+  </header>
+
+  <main>
+    <section id="features">
+      <h2>6つの機能（技術ブログ特化）</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>技術タイトル候補 10案</h3>
+          <p>「〜してみた」「〜で解決した」「〜のすべて」など Zenn でクリックされるパターンを意識。技術スタック名・バージョンを自動で含める。</p>
+        </div>
+        <div class="feature">
+          <h3>冒頭文 3案</h3>
+          <p>「問題提起型」「TL;DR 型」「コード先出し型」の 3 パターン。技術記事らしい書き出しを即座に。</p>
+        </div>
+        <div class="feature">
+          <h3>技術記事構造 章立て</h3>
+          <p>「前提→課題→解決→評価→まとめ」のエンジニア的な章立てを提案。PREP より技術ドキュメントに馴染む。</p>
+        </div>
+        <div class="feature highlight">
+          <span style="display:inline-block;background:var(--primary);color:white;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700;margin-bottom:8px;letter-spacing:0.05em;">Zenn 限定</span>
+          <h3>コードレビュー</h3>
+          <p>記事内のコードスニペットを AI がレビュー。構文エラー・セキュリティ問題・ベストプラクティスを指摘。公開前の品質チェックに。</p>
+        </div>
+        <div class="feature">
+          <h3>読みやすさ評価</h3>
+          <p>漢字比率・1文長さ・コードブロック比率を可視化。技術記事に最適なスコアを API コストゼロで即算出。</p>
+        </div>
+        <div class="feature">
+          <h3>技術 SEO チェック</h3>
+          <p>狙うキーワード（ライブラリ名・言語名等）の出現密度を確認。Zenn 内検索と外部流入の両方を意識。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2>料金</h2>
+      <div class="pricing">
+        <div class="price-card">
+          <h3>無料</h3>
+          <div class="price">¥0</div>
+          <p>すべての基本機能が使えます</p>
+          <ul>
+            <li>タイトル候補 / 冒頭文 / 章立て</li>
+            <li>コードレビュー / 読みやすさ / SEO</li>
+            <li>API キーはあなたのもの (Claude / OpenAI)</li>
+          </ul>
+        </div>
+        <div class="price-card pro">
+          <h3>Pro <small>(近日)</small></h3>
+          <div class="price">¥980 <small style="font-size:14px">/月</small></div>
+          <p>継続的に技術記事を書く方向け</p>
+          <ul>
+            <li>技術プロンプトテンプレライブラリ</li>
+            <li>生成履歴の保存と再利用</li>
+            <li>複数 AI 同時比較 (Claude × GPT × Gemini)</li>
+            <li>テキスト読み上げプレビュー</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2>よくある質問</h2>
+      <dl>
+        <dt>本当に無料?</dt>
+        <dd>はい。基本機能は無料です。ただし AI 利用料はお客様自身の API 契約に従って発生します (Claude Haiku なら 1 記事あたり数円〜数十円程度)。</dd>
+        <dt>コードレビュー機能でコードが流出しない?</dt>
+        <dd>コードは<strong>あなたの API キーを通じて AI に送信されます</strong>。私たちのサーバーは一切経由しません。Anthropic / OpenAI の利用規約が適用されます。</dd>
+        <dt>Zenn 公式の機能ですか?</dt>
+        <dd>いいえ。本拡張機能は Zenn 運営会社の公式製品ではありません。個人開発者によるサードパーティ製品です。</dd>
+        <dt>データはどこに保存される?</dt>
+        <dd>API キーや設定はすべて <strong>あなたの Chrome のローカルストレージ</strong> にのみ保存されます。本拡張機能の運営者にデータは送られません。</dd>
+        <dt>同じ Kakeru の noteAI+ との違いは?</dt>
+        <dd>noteAI+ は note.com 向け（一般ライター向け）、Zenn-AI+ は Zenn 向け（エンジニア向け）です。コードレビュー機能と技術記事特化のプロンプトが追加されています。</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="#features">機能</a>
+      <a href="#pricing">料金</a>
+      <a href="https://kakeru-tools.github.io/noteai-plus-site/">noteAI+ (note.com 版)</a>
+    </p>
+    <p>© 2026 Zenn-AI+ — Zenn は株式会社 Classi の登録商標です</p>
+  </footer>
+</body>
+</html>
