@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZennをAIで書く｜効率化と正確性のコツ｜Zenn-AI+</title>
+<meta name="description" content="Zennの技術記事をAIで効率化する勘所(構成案・読みやすさ・抜け漏れ点検)と、事実誤りやコード未検証を防ぐ検証の手順を、例文・チェックリスト付きで解説。">
+<link rel="canonical" href="https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-ai-de-kaku/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article"><meta property="og:title" content="ZennをAIで書く｜効率化と正確性のコツ">
+<meta property="og:description" content="Zennの技術記事をAIで効率化する勘所(構成案・読みやすさ・抜け漏れ点検)と、事実誤りやコード未検証を防ぐ検証の手順を、例文・チェックリスト付きで解説。"><meta property="og:url" content="https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-ai-de-kaku/">
+<meta property="og:image" content="https://kakeru-tools.github.io/zenn-ai-plus-site/icon-128.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="ZennをAIで書く｜効率化と正確性のコツ">
+<meta name="twitter:description" content="Zennの技術記事をAIで効率化する勘所(構成案・読みやすさ・抜け漏れ点検)と、事実誤りやコード未検証を防ぐ検証の手順を、例文・チェックリスト付きで解説。"><meta name="twitter:image" content="https://kakeru-tools.github.io/zenn-ai-plus-site/icon-128.png">
+<style>:root{--p:#1f6fcc}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI","Hiragino Sans","Meiryo","Yu Gothic",sans-serif;color:#1a1a1a;background:#fafafa;line-height:1.85}
+a{color:var(--p)}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+header.site{background:var(--p);color:#fff;padding:14px 0}
+header.site .wrap{display:flex;align-items:center;gap:10px}
+header.site a{color:#fff;text-decoration:none;font-weight:800;font-size:18px}
+.crumb{font-size:13px;color:#666;padding:16px 0 0}
+.crumb a{color:#666}
+article h1{font-size:30px;line-height:1.4;margin:10px 0 6px;font-weight:800;letter-spacing:-.01em}
+.meta{color:#888;font-size:13px;margin-bottom:18px}
+article h2{font-size:23px;margin:34px 0 12px;padding-top:8px;border-top:1px solid #eee;font-weight:800}
+article h3{font-size:18px;margin:22px 0 8px;font-weight:700}
+article p{margin:12px 0}
+article ul,article ol{margin:12px 0;padding-left:24px}
+article li{margin:6px 0}
+article code{background:#f0f2f4;padding:2px 6px;border-radius:4px;font-size:.92em;font-family:Consolas,Menlo,monospace}
+article pre{background:#1b1f24;color:#e6e9ee;padding:16px;border-radius:10px;overflow:auto;font-size:14px}
+article pre code{background:none;color:inherit;padding:0}
+article blockquote{margin:16px 0;padding:8px 16px;border-left:4px solid var(--p);background:#f4f7f5;color:#444}
+article table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px}
+article th,article td{border:1px solid #e2e2e2;padding:8px 10px;text-align:left}
+article th{background:#f4f6f8}
+.cta-card{margin:40px 0 8px;border:2px solid var(--p);border-radius:14px;padding:22px;background:#fff}
+.cta-card h3{margin:0 0 8px;font-size:19px;color:var(--p)}
+.cta-card p{margin:8px 0;font-size:15px;color:#333}
+.cta-btn{display:inline-block;margin-top:12px;background:var(--p);color:#fff;text-decoration:none;font-weight:700;padding:12px 26px;border-radius:999px}
+.cta-note{font-size:12px;color:#999;margin-top:10px}
+.related{margin:36px 0;padding:18px;background:#fff;border:1px solid #eee;border-radius:12px}
+.related h3{margin:0 0 10px;font-size:16px}
+.related a{display:block;padding:5px 0}
+footer{margin:48px 0 32px;padding-top:18px;border-top:1px solid #eee;color:#999;font-size:13px;text-align:center}
+.bloglist a.card{display:block;background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:18px;margin:14px 0;text-decoration:none;color:inherit}
+.bloglist a.card:hover{border-color:var(--p)}
+.bloglist .t{font-size:18px;font-weight:700;color:var(--p)}
+.bloglist .d{font-size:14px;color:#666;margin-top:6px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "ZennをAIで書く｜効率化と正確性のコツ", "description": "Zennの技術記事をAIで効率化する勘所(構成案・読みやすさ・抜け漏れ点検)と、事実誤りやコード未検証を防ぐ検証の手順を、例文・チェックリスト付きで解説。", "inLanguage": "ja", "datePublished": "2026-06-15", "dateModified": "2026-06-15", "author": {"@type": "Organization", "name": "Kakeru"}, "publisher": {"@type": "Organization", "name": "Kakeru"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-ai-de-kaku/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Zenn-AI+", "item": "https://kakeru-tools.github.io/zenn-ai-plus-site/"}, {"@type": "ListItem", "position": 2, "name": "記事", "item": "https://kakeru-tools.github.io/zenn-ai-plus-site/blog/"}, {"@type": "ListItem", "position": 3, "name": "ZennをAIで書く｜効率化と正確性のコツ", "item": "https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-ai-de-kaku/"}]}</script>
+</head><body>
+<header class="site"><div class="wrap"><a href="../../">Zenn-AI+</a></div></header>
+<div class="wrap">
+<div class="crumb"><a href="../../">Zenn-AI+</a> ／ <a href="../">記事</a> ／ ZennをAIで書く｜効率化と正確性のコツ</div>
+<article>
+<h1>ZennをAIで書く｜効率化と正確性のコツ</h1>
+<div class="meta">2026-06-15 ・ Zenn-AI+ の中の人</div>
+<h2>AIは「下書きの加速」には強く、「正しさの保証」には弱い</h2>
+<p>Zennで技術記事を書くとき、AIは便利な相棒になります。ただし得意・不得意がはっきり分かれます。構成を組む、表現を整える、抜けを指摘させる——こうした「考える前のたたき台づくり」は速くなります。一方で、事実が正しいか・コードが動くか・出典が確かか、という「正しさ」はAIに任せきれません。ここを混同すると、読みやすいのに間違っている記事ができあがります。</p>
+<p>この記事では、効率化に効く使い方と、技術記事ならではの落とし穴、そして検証を人がやるための具体的な手順を分けて整理します。</p>
+
+<h2>効率化に効く3つの使いどころ</h2>
+
+<h3>1. 構成案を3案ほど出させて、選ぶ・混ぜる</h3>
+<p>白紙から書き始めると手が止まります。記事の前提知識・解決したい課題・想定読者を渡し、構成案を複数出させて土台にします。技術記事は「前提 → 課題 → 解決 → 評価 → まとめ」の流れがハマりやすいので、その型で頼むと無駄が減ります。</p>
+<pre><code>依頼例:
+読者: Next.jsのApp Routerを触り始めた人
+伝えたいこと: Server Componentでのデータ取得の勘所と、よくある詰まり
+この内容で見出し構成を3案。各案でh2/h3まで。</code></pre>
+<p>出てきた案はそのまま使わず、見出しの順番を入れ替えたり2案を合体させたりして、自分の経験に合う形に直します。AIの構成は「平均的に無難」なので、独自の知見を足す余地を必ず残します。</p>
+
+<h3>2. 冒頭文と読みやすさの調整</h3>
+<p>冒頭の数行は離脱を左右します。「結論先出し」「問題提起から入る」「コードを先に見せる」など、入り方を変えた案を出させて比べると判断が速いです。本文ができたら、一文が長すぎる箇所・指示語の多用・コードと地の文の比率などを点検させると、推敲の抜けが減ります。</p>
+
+<h3>3. 抜け漏れの点検役にする</h3>
+<p>書き終えた原稿を貼り、「初学者がつまずきそうな前提の説明漏れ」「環境やバージョンの記載漏れ」を指摘させます。自分では当然と思って飛ばした説明を拾えます。指摘は鵜呑みにせず、必要なものだけ採用します。</p>
+
+<h2>技術記事だからこそ危険なこと</h2>
+<ul>
+<li><strong>事実誤り(ハルシネーション)</strong>: 存在しないAPIやオプション名をもっともらしく書きます。特にバージョン依存の挙動は外しやすい。</li>
+<li><strong>コードが動かない</strong>: 一見正しいが、import漏れ・古い書き方・型不一致で実行すると落ちる、というのが頻発します。</li>
+<li><strong>一次情報の希薄化</strong>: AIの要約だけで書くと、公式ドキュメントやissueを読まずに済ませがちになり、記事の深さと正確さが落ちます。</li>
+</ul>
+
+<h2>検証は人がやる——最低限の手順</h2>
+<p>「AIに書かせる」と「人が確かめる」を必ず分けます。次の手順を習慣にすると事故が減ります。</p>
+<ol>
+<li><strong>コードは自分の手元で実行する</strong>。コピペして動かし、出力まで確認する。記事には実際に動いた版を貼る。</li>
+<li><strong>事実は一次情報で裏取りする</strong>。API名・引数・デフォルト値・非推奨かどうかは、必ず公式ドキュメントや該当バージョンのリリースノートで確認する。</li>
+<li><strong>バージョンを明記する</strong>。「2024年時点 / vX.Y で確認」と書くだけで、読者も自分も後で検証しやすくなる。</li>
+<li><strong>断定の根拠を一つ言えるか自問する</strong>。理由を説明できない主張は、AIの推測がそのまま残っている可能性が高い。</li>
+</ol>
+<blockquote>原則: AIの出力は「査読前の下書き」。レビュアーは自分。読みやすさが上がるほど誤りに気づきにくくなるので、流暢さと正しさは別物として扱う。</blockquote>
+
+<h2>執筆画面に補助を足す選択肢</h2>
+<p>ちなみに筆者は、こうした作業をZennの執筆画面の中で完結させたくて、個人で<strong>Zenn-AI+</strong>という非公式のChrome拡張を作っています(Zenn公式の製品ではありません)。zenn.devの編集画面にサイドバーを足し、タイトル候補・冒頭文案・章立て・コードレビュー・読みやすさ評価・技術SEOチェックを呼べるものです。無料機能は毎日使えます(回数上限あり)、無制限などのProは月¥980(課金はExtensionPay/Stripe)。設計はBYOKで、自分のClaudeやOpenAIのAPIキーを使い、本文やキーは運営サーバーに送らずローカルに保存、AI利用料は自分のAPI契約に直接かかります。あくまで下書きと点検を速くする道具で、前述の検証(コード実行・一次情報の裏取り)を肩代わりするものではありません。</p>
+<p>導入は任意です。手元のAIチャットに原稿を貼る運用でも、ここで書いた「効率化と検証を分ける」考え方は同じように使えます。</p>
+
+<h2>まとめ</h2>
+<p>AIはZennの執筆を速くしますが、速くなるのは主に「構成・表現・点検」です。事実とコードの正しさは、最後まで人が一次情報と実行で確かめる。この線引きを守るだけで、読みやすさと信頼性を両立した技術記事に近づきます。</p>
+</article>
+<div class="cta-card">
+<h3>この記事を書いた人が作ったツール：Zenn-AI+</h3>
+<p>Zennの執筆画面に、AI執筆補助のサイドバーを足すChrome拡張です（Zenn公式ではない、個人開発のサードパーティ製です）。タイトル・冒頭・構成・読みやすさなどを、編集画面のまま確認できます。</p>
+<p>無料で毎日使えます（回数上限あり）。Proは月額¥980。自分のClaude／OpenAIのAPIキーで動く<strong>BYOK設計</strong>で、本文もAPIキーも運営サーバーには送らず、ブラウザ内だけで処理します。</p>
+<a class="cta-btn" href="https://chromewebstore.google.com/detail/fjnijcgebhmnocmmbajpdjdaiplajige" target="_blank" rel="noopener">Chrome に追加（無料）</a>
+<div class="cta-note">※ AIの利用料はご自身のAPI契約に直接発生します（Claude Haikuなら1記事あたり数円〜数十円程度）。</div>
+</div>
+<div class="related"><h3>関連記事</h3><a href="../zenn-kiji-kakikata/">Zenn記事の書き方｜構成テンプレと手順</a><a href="../gijutsu-kiji-yomiyasuku/">技術記事を読みやすくする7つのコツ</a><a href="../zenn-title-tsukekata/">Zennのタイトルの付け方｜技術記事の見出し</a></div>
+<footer>© Kakeru ・ <a href="../../">Zenn-AI+ について</a> ・ <a href="../">記事一覧</a></footer>
+</div></body></html>
