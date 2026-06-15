@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://kakeru-tools.github.io/zenn-ai-plus-site/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://kakeru-tools.github.io/zenn-ai-plus-site/privacy.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+  <url><loc>https://kakeru-tools.github.io/zenn-ai-plus-site/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://kakeru-tools.github.io/zenn-ai-plus-site/blog/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-kiji-kakikata/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kakeru-tools.github.io/zenn-ai-plus-site/blog/gijutsu-kiji-yomiyasuku/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-title-tsukekata/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kakeru-tools.github.io/zenn-ai-plus-site/privacy.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
 </urlset>

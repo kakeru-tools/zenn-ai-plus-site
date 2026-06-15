@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenn記事の書き方｜構成テンプレと手順｜Zenn-AI+</title>
+<meta name="description" content="Zennで技術記事を書く流れを、課題→前提→手順→ハマりどころ→まとめの型とMarkdown・コードブロックの実務で解説します。">
+<link rel="canonical" href="https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-kiji-kakikata/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article"><meta property="og:title" content="Zenn記事の書き方｜構成テンプレと手順">
+<meta property="og:description" content="Zennで技術記事を書く流れを、課題→前提→手順→ハマりどころ→まとめの型とMarkdown・コードブロックの実務で解説します。"><meta property="og:url" content="https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-kiji-kakikata/">
+<meta property="og:image" content="https://kakeru-tools.github.io/zenn-ai-plus-site/icon-128.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Zenn記事の書き方｜構成テンプレと手順">
+<meta name="twitter:description" content="Zennで技術記事を書く流れを、課題→前提→手順→ハマりどころ→まとめの型とMarkdown・コードブロックの実務で解説します。"><meta name="twitter:image" content="https://kakeru-tools.github.io/zenn-ai-plus-site/icon-128.png">
+<style>:root{--p:#1f6fcc}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI","Hiragino Sans","Meiryo","Yu Gothic",sans-serif;color:#1a1a1a;background:#fafafa;line-height:1.85}
+a{color:var(--p)}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+header.site{background:var(--p);color:#fff;padding:14px 0}
+header.site .wrap{display:flex;align-items:center;gap:10px}
+header.site a{color:#fff;text-decoration:none;font-weight:800;font-size:18px}
+.crumb{font-size:13px;color:#666;padding:16px 0 0}
+.crumb a{color:#666}
+article h1{font-size:30px;line-height:1.4;margin:10px 0 6px;font-weight:800;letter-spacing:-.01em}
+.meta{color:#888;font-size:13px;margin-bottom:18px}
+article h2{font-size:23px;margin:34px 0 12px;padding-top:8px;border-top:1px solid #eee;font-weight:800}
+article h3{font-size:18px;margin:22px 0 8px;font-weight:700}
+article p{margin:12px 0}
+article ul,article ol{margin:12px 0;padding-left:24px}
+article li{margin:6px 0}
+article code{background:#f0f2f4;padding:2px 6px;border-radius:4px;font-size:.92em;font-family:Consolas,Menlo,monospace}
+article pre{background:#1b1f24;color:#e6e9ee;padding:16px;border-radius:10px;overflow:auto;font-size:14px}
+article pre code{background:none;color:inherit;padding:0}
+article blockquote{margin:16px 0;padding:8px 16px;border-left:4px solid var(--p);background:#f4f7f5;color:#444}
+article table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px}
+article th,article td{border:1px solid #e2e2e2;padding:8px 10px;text-align:left}
+article th{background:#f4f6f8}
+.cta-card{margin:40px 0 8px;border:2px solid var(--p);border-radius:14px;padding:22px;background:#fff}
+.cta-card h3{margin:0 0 8px;font-size:19px;color:var(--p)}
+.cta-card p{margin:8px 0;font-size:15px;color:#333}
+.cta-btn{display:inline-block;margin-top:12px;background:var(--p);color:#fff;text-decoration:none;font-weight:700;padding:12px 26px;border-radius:999px}
+.cta-note{font-size:12px;color:#999;margin-top:10px}
+.related{margin:36px 0;padding:18px;background:#fff;border:1px solid #eee;border-radius:12px}
+.related h3{margin:0 0 10px;font-size:16px}
+.related a{display:block;padding:5px 0}
+footer{margin:48px 0 32px;padding-top:18px;border-top:1px solid #eee;color:#999;font-size:13px;text-align:center}
+.bloglist a.card{display:block;background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:18px;margin:14px 0;text-decoration:none;color:inherit}
+.bloglist a.card:hover{border-color:var(--p)}
+.bloglist .t{font-size:18px;font-weight:700;color:var(--p)}
+.bloglist .d{font-size:14px;color:#666;margin-top:6px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Zenn記事の書き方｜構成テンプレと手順", "description": "Zennで技術記事を書く流れを、課題→前提→手順→ハマりどころ→まとめの型とMarkdown・コードブロックの実務で解説します。", "inLanguage": "ja", "datePublished": "2026-06-15", "dateModified": "2026-06-15", "author": {"@type": "Organization", "name": "Kakeru"}, "publisher": {"@type": "Organization", "name": "Kakeru"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-kiji-kakikata/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Zenn-AI+", "item": "https://kakeru-tools.github.io/zenn-ai-plus-site/"}, {"@type": "ListItem", "position": 2, "name": "記事", "item": "https://kakeru-tools.github.io/zenn-ai-plus-site/blog/"}, {"@type": "ListItem", "position": 3, "name": "Zenn記事の書き方｜構成テンプレと手順", "item": "https://kakeru-tools.github.io/zenn-ai-plus-site/blog/zenn-kiji-kakikata/"}]}</script>
+</head><body>
+<header class="site"><div class="wrap"><a href="../../">Zenn-AI+</a></div></header>
+<div class="wrap">
+<div class="crumb"><a href="../../">Zenn-AI+</a> ／ <a href="../">記事</a> ／ Zenn記事の書き方｜構成テンプレと手順</div>
+<article>
+<h1>Zenn記事の書き方｜構成テンプレと手順</h1>
+<div class="meta">2026-06-15 ・ Zenn-AI+ の中の人</div>
+<p>Zennで技術記事を書こうとして、書き出しで手が止まる。あるいは書き終えたのに何を伝えたい記事か自分でも曖昧になる。原因の多くは「型」を決めずに書き始めることです。この記事では、再現性のある構成テンプレートと、Markdown・コードブロックの実務的な使い方を手順で示します。</p>
+
+<h2>まず結論：記事は5つのブロックで組む</h2>
+<p>技術記事は次の順番で組むと、読者が迷わず最後まで読めます。書く前にこの見出しだけ先に並べてしまうのが近道です。</p>
+<ul>
+<li><strong>課題</strong>：何に困っていて、この記事で何が解決するか</li>
+<li><strong>前提</strong>：環境・バージョン・対象読者</li>
+<li><strong>手順</strong>：再現できる具体的なステップ</li>
+<li><strong>ハマりどころ</strong>：詰まった点と回避策</li>
+<li><strong>まとめ</strong>：要点の再掲と次の一歩</li>
+</ul>
+<p>この5ブロックは、読者が検索で記事に来る動線とそのまま一致します。検索する人は「困っている → 自分の環境で再現できるか確認したい → 詰まる前に注意点を知りたい」という順で読みます。</p>
+
+<h2>各ブロックの書き方と例文</h2>
+
+<h3>1. 課題：1〜2文で言い切る</h3>
+<p>冒頭で読者に「これは自分の記事だ」と感じてもらえないと離脱します。背景説明から入らず、課題から入ります。</p>
+<blockquote>例：「Next.jsのApp RouterでうまくCookieが読めない。原因はServer Component側の取得方法でした。同じ症状を最短で直す手順をまとめます。」</blockquote>
+
+<h3>2. 前提：再現性の土台</h3>
+<p>バージョン差で手順が動かないのは技術記事で最も多いクレームです。箇条書きで明示します。</p>
+<ul>
+<li>OS / ランタイム（例：macOS, Node.js 20）</li>
+<li>主要ライブラリのバージョン（例：Next.js 14.2）</li>
+<li>想定読者（例：Reactは触ったことがある人）</li>
+</ul>
+
+<h3>3. 手順：コピペで動く粒度に</h3>
+<p>各ステップは「何をするか」を見出しにし、その下にコマンドやコードを置きます。コードブロックは言語名を付けるとシンタックスハイライトが効きます。</p>
+<pre><code>```ts
+// app/page.tsx
+import { cookies } from 'next/headers'
+
+export default function Page() {
+  const token = cookies().get('token')?.value
+  return &lt;p&gt;{token ?? 'no token'}&lt;/p&gt;
+}
+```</code></pre>
+<p>ZennのMarkdownでは、ファイル名を併記すると読者が貼り付け先を間違えにくくなります（例：<code>```ts:app/page.tsx</code> のように書く）。注意を促したいときはメッセージ記法も使えます。</p>
+<pre><code>:::message
+このコードは Server Component 前提です。'use client' では動きません。
+:::</code></pre>
+
+<h3>4. ハマりどころ：自分の失敗をそのまま書く</h3>
+<p>ここが記事の差別化点になります。きれいな手順より「自分はここで30分溶かした」という情報のほうが読者に刺さります。</p>
+<ul>
+<li>出たエラーメッセージを原文で載せる（検索で見つけてもらえる）</li>
+<li>なぜ起きたかを一言添える</li>
+<li>回避策を具体的に書く</li>
+</ul>
+
+<h3>5. まとめ：要点と次の一歩</h3>
+<p>箇条書きで2〜3点に再圧縮し、関連記事や公式ドキュメントへのリンクで締めます。</p>
+
+<h2>Markdown・執筆の実務メモ</h2>
+<ul>
+<li>見出しは <code>h2</code> から使い、<code>h1</code> はタイトルが担うので本文では使わない</li>
+<li>長い文章は3〜4文ごとに段落を分け、スマホでの可読性を確保する</li>
+<li>コードブロックには必ず言語指定を付ける</li>
+<li>画像はキャプチャより、可能なら図やコードで示すほうが陳腐化しにくい</li>
+</ul>
+<p>下書きの段階では、まず見出しだけ全部置いて、空の各ブロックを埋めていくと迷いません。</p>
+
+<p>ちなみに、書き出しや章立てで止まりがちなら、筆者が個人で作っている非公式のChrome拡張「Zenn-AI+」も選択肢のひとつです。zenn.devの執筆画面にサイドバーを足し、タイトル候補や冒頭文、章立て、コードレビュー、読みやすさ評価などを補助します。無料機能は毎日（回数上限あり）使え、無制限のProは月¥980（決済はExtensionPay）。設計はBYOK（自分のClaudeまたはOpenAIのAPIキーを使い、本文やキーは運営サーバーに送らずローカル保存、AI利用料は自分のAPI契約に直課金）です。あくまで下書きの補助で、最終的な構成と検証は自分の手で行うのが前提です。<a href="https://chromewebstore.google.com/detail/fjnijcgebhmnocmmbajpdjdaiplajige">ストアページ</a>から確認できます。</p>
+
+<h2>まとめ</h2>
+<ul>
+<li>書く前に「課題→前提→手順→ハマりどころ→まとめ」の見出しを先に並べる</li>
+<li>前提とコードブロックの言語指定で再現性を担保する</li>
+<li>ハマりどころこそが他記事との差になる</li>
+</ul>
+<p>型が決まれば、あとは各ブロックを埋めるだけです。1本目を書き上げたら、その記事自体を次のテンプレートとして再利用していきましょう。</p>
+</article>
+<div class="cta-card">
+<h3>この記事を書いた人が作ったツール：Zenn-AI+</h3>
+<p>Zennの執筆画面に、AI執筆補助のサイドバーを足すChrome拡張です（Zenn公式ではない、個人開発のサードパーティ製です）。タイトル・冒頭・構成・読みやすさなどを、編集画面のまま確認できます。</p>
+<p>無料で毎日使えます（回数上限あり）。Proは月額¥980。自分のClaude／OpenAIのAPIキーで動く<strong>BYOK設計</strong>で、本文もAPIキーも運営サーバーには送らず、ブラウザ内だけで処理します。</p>
+<a class="cta-btn" href="https://chromewebstore.google.com/detail/fjnijcgebhmnocmmbajpdjdaiplajige" target="_blank" rel="noopener">Chrome に追加（無料）</a>
+<div class="cta-note">※ AIの利用料はご自身のAPI契約に直接発生します（Claude Haikuなら1記事あたり数円〜数十円程度）。</div>
+</div>
+<div class="related"><h3>関連記事</h3><a href="../gijutsu-kiji-yomiyasuku/">技術記事を読みやすくする7つのコツ</a><a href="../zenn-title-tsukekata/">Zennのタイトルの付け方｜技術記事の見出し</a></div>
+<footer>© Kakeru ・ <a href="../../">Zenn-AI+ について</a> ・ <a href="../">記事一覧</a></footer>
+</div></body></html>
